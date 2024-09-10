@@ -1,0 +1,22 @@
+{
+  "name": "restaking-ts-sdk",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/A2Dsquad/restaking-ts-sdk.git",
+  "author": "aa-sniperman <nhatducmo@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "index": "ts-node -r tsconfig-paths/register src/index.ts"
+  },
+  "dependencies": {
+    "@aptos-labs/ts-sdk": "^1.27.1",
+    "@thalalabs/surf": "^1.7.3",
+    "ethers": "^6.13.2",
+    "merkletreejs": "^0.4.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.1.3"
+  }
+}
