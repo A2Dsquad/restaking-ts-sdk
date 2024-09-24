@@ -1,0 +1,125 @@
+{
+  "address": "0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad",
+  "name": "staking_pool",
+  "friends": [
+    "0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::staker_manager"
+  ],
+  "exposed_functions": [
+    {
+      "name": "deposit",
+      "visibility": "friend",
+      "is_entry": false,
+      "is_view": false,
+      "generic_type_params": [],
+      "params": [
+        "0x1::object::Object<0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::staking_pool::StakingPool>",
+        "u64"
+      ],
+      "return": [
+        "u128"
+      ]
+    },
+    {
+      "name": "ensure_staking_pool",
+      "visibility": "friend",
+      "is_entry": false,
+      "is_view": false,
+      "generic_type_params": [],
+      "params": [
+        "0x1::object::Object<0x1::fungible_asset::Metadata>"
+      ],
+      "return": [
+        "0x1::object::Object<0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::staking_pool::StakingPool>"
+      ]
+    },
+    {
+      "name": "token_metadata",
+      "visibility": "public",
+      "is_entry": false,
+      "is_view": true,
+      "generic_type_params": [],
+      "params": [
+        "0x1::object::Object<0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::staking_pool::StakingPool>"
+      ],
+      "return": [
+        "0x1::object::Object<0x1::fungible_asset::Metadata>"
+      ]
+    },
+    {
+      "name": "token_store",
+      "visibility": "public",
+      "is_entry": false,
+      "is_view": true,
+      "generic_type_params": [],
+      "params": [
+        "0x1::object::Object<0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::staking_pool::StakingPool>"
+      ],
+      "return": [
+        "0x1::object::Object<0x1::fungible_asset::FungibleStore>"
+      ]
+    },
+    {
+      "name": "total_shares",
+      "visibility": "public",
+      "is_entry": false,
+      "is_view": true,
+      "generic_type_params": [],
+      "params": [
+        "0x1::object::Object<0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::staking_pool::StakingPool>"
+      ],
+      "return": [
+        "u128"
+      ]
+    },
+    {
+      "name": "withdraw",
+      "visibility": "friend",
+      "is_entry": false,
+      "is_view": false,
+      "generic_type_params": [],
+      "params": [
+        "address",
+        "0x1::object::Object<0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::staking_pool::StakingPool>",
+        "u128"
+      ],
+      "return": []
+    }
+  ],
+  "structs": [
+    {
+      "name": "ExchangeRateEmitted",
+      "is_native": false,
+      "is_event": true,
+      "abilities": [
+        "drop",
+        "store"
+      ],
+      "generic_type_params": [],
+      "fields": [
+        {
+          "name": "exchange_rate",
+          "type": "u128"
+        }
+      ]
+    },
+    {
+      "name": "StakingPool",
+      "is_native": false,
+      "is_event": false,
+      "abilities": [
+        "key"
+      ],
+      "generic_type_params": [],
+      "fields": [
+        {
+          "name": "token_store",
+          "type": "0x1::object::Object<0x1::fungible_asset::FungibleStore>"
+        },
+        {
+          "name": "total_shares",
+          "type": "u128"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "address": "0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad",
+  "name": "avs_manager",
+  "friends": [],
+  "exposed_functions": [
+    {
+      "name": "create_avs_rewards_for_all_submission",
+      "visibility": "public",
+      "is_entry": true,
+      "is_view": false,
+      "generic_type_params": [],
+      "params": [
+        "&signer",
+        "vector<0x1::object::Object<0x1::fungible_asset::Metadata>>",
+        "vector<u64>",
+        "0x1::object::Object<0x1::fungible_asset::Metadata>",
+        "u64",
+        "u64",
+        "u64"
+      ],
+      "return": []
+    },
+    {
+      "name": "create_avs_rewards_submission",
+      "visibility": "public",
+      "is_entry": true,
+      "is_view": false,
+      "generic_type_params": [],
+      "params": [
+        "&signer",
+        "vector<0x1::object::Object<0x1::fungible_asset::Metadata>>",
+        "vector<u64>",
+        "0x1::object::Object<0x1::fungible_asset::Metadata>",
+        "u64",
+        "u64",
+        "u64"
+      ],
+      "return": []
+    },
+    {
+      "name": "initialize",
+      "visibility": "public",
+      "is_entry": true,
+      "is_view": false,
+      "generic_type_params": [],
+      "params": [],
+      "return": []
+    },
+    {
+      "name": "is_initialized",
+      "visibility": "public",
+      "is_entry": false,
+      "is_view": true,
+      "generic_type_params": [],
+      "params": [],
+      "return": [
+        "bool"
+      ]
+    }
+  ],
+  "structs": [
+    {
+      "name": "AVSManagerConfigs",
+      "is_native": false,
+      "is_event": false,
+      "abilities": [
+        "key"
+      ],
+      "generic_type_params": [],
+      "fields": [
+        {
+          "name": "signer_cap",
+          "type": "0x1::account::SignerCapability"
+        }
+      ]
+    },
+    {
+      "name": "AVSRewardsSubmissionCreated",
+      "is_native": false,
+      "is_event": true,
+      "abilities": [
+        "drop",
+        "store"
+      ],
+      "generic_type_params": [],
+      "fields": [
+        {
+          "name": "avs",
+          "type": "address"
+        },
+        {
+          "name": "submission_nonce",
+          "type": "u256"
+        },
+        {
+          "name": "rewards_submission_hash",
+          "type": "u256"
+        },
+        {
+          "name": "rewards_submission",
+          "type": "0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::avs_manager::RewardsSubmission"
+        }
+      ]
+    },
+    {
+      "name": "AVSRewardsSubmissionForAllCreated",
+      "is_native": false,
+      "is_event": true,
+      "abilities": [
+        "drop",
+        "store"
+      ],
+      "generic_type_params": [],
+      "fields": [
+        {
+          "name": "avs",
+          "type": "address"
+        },
+        {
+          "name": "submission_nonce",
+          "type": "u256"
+        },
+        {
+          "name": "rewards_submission_for_all_hash",
+          "type": "u256"
+        },
+        {
+          "name": "rewards_submission",
+          "type": "0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::avs_manager::RewardsSubmission"
+        }
+      ]
+    },
+    {
+      "name": "AVSStore",
+      "is_native": false,
+      "is_event": false,
+      "abilities": [
+        "key"
+      ],
+      "generic_type_params": [],
+      "fields": [
+        {
+          "name": "operator_registration",
+          "type": "0x1::smart_table::SmartTable<address, bool>"
+        },
+        {
+          "name": "rewards_submission_nonce",
+          "type": "u256"
+        },
+        {
+          "name": "rewards_submission_hash_submitted",
+          "type": "0x1::smart_table::SmartTable<u256, bool>"
+        },
+        {
+          "name": "rewards_submission_for_all_hash_submitted",
+          "type": "0x1::smart_table::SmartTable<u256, bool>"
+        }
+      ]
+    },
+    {
+      "name": "RewardsSubmission",
+      "is_native": false,
+      "is_event": false,
+      "abilities": [
+        "copy",
+        "drop",
+        "store"
+      ],
+      "generic_type_params": [],
+      "fields": [
+        {
+          "name": "tokens",
+          "type": "vector<0x1::object::Object<0x1::fungible_asset::Metadata>>"
+        },
+        {
+          "name": "multipliers",
+          "type": "vector<u64>"
+        },
+        {
+          "name": "rewarded_token",
+          "type": "0x1::object::Object<0x1::fungible_asset::Metadata>"
+        },
+        {
+          "name": "rewarded_amount",
+          "type": "u64"
+        },
+        {
+          "name": "start_time",
+          "type": "u64"
+        },
+        {
+          "name": "duration",
+          "type": "u64"
+        }
+      ]
+    }
+  ]
+}

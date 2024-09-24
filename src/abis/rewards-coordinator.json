@@ -1,0 +1,426 @@
+{
+  "address": "0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad",
+  "name": "rewards_coordinator",
+  "friends": [],
+  "exposed_functions": [
+    {
+      "name": "disable_root",
+      "visibility": "public",
+      "is_entry": true,
+      "is_view": false,
+      "generic_type_params": [],
+      "params": [
+        "&signer",
+        "u64"
+      ],
+      "return": []
+    },
+    {
+      "name": "initialize",
+      "visibility": "public",
+      "is_entry": true,
+      "is_view": false,
+      "generic_type_params": [],
+      "params": [],
+      "return": []
+    },
+    {
+      "name": "is_initialized",
+      "visibility": "public",
+      "is_entry": false,
+      "is_view": true,
+      "generic_type_params": [],
+      "params": [],
+      "return": [
+        "bool"
+      ]
+    },
+    {
+      "name": "process_claim",
+      "visibility": "public",
+      "is_entry": true,
+      "is_view": false,
+      "generic_type_params": [],
+      "params": [
+        "&signer",
+        "address",
+        "u64",
+        "u32",
+        "vector<u8>",
+        "address",
+        "vector<u8>",
+        "vector<u32>",
+        "vector<vector<u8>>",
+        "vector<0x1::object::Object<0x1::fungible_asset::Metadata>>",
+        "vector<u64>"
+      ],
+      "return": []
+    },
+    {
+      "name": "set_activation_delay",
+      "visibility": "public",
+      "is_entry": true,
+      "is_view": false,
+      "generic_type_params": [],
+      "params": [
+        "&signer",
+        "u64"
+      ],
+      "return": []
+    },
+    {
+      "name": "set_global_commission_bips",
+      "visibility": "public",
+      "is_entry": true,
+      "is_view": false,
+      "generic_type_params": [],
+      "params": [
+        "&signer",
+        "u16"
+      ],
+      "return": []
+    },
+    {
+      "name": "set_rewards_updater",
+      "visibility": "public",
+      "is_entry": true,
+      "is_view": false,
+      "generic_type_params": [],
+      "params": [
+        "&signer",
+        "address"
+      ],
+      "return": []
+    },
+    {
+      "name": "submit_root",
+      "visibility": "public",
+      "is_entry": true,
+      "is_view": false,
+      "generic_type_params": [],
+      "params": [
+        "&signer",
+        "u256",
+        "u64"
+      ],
+      "return": []
+    }
+  ],
+  "structs": [
+    {
+      "name": "ActivationDelaySet",
+      "is_native": false,
+      "is_event": true,
+      "abilities": [
+        "drop",
+        "store"
+      ],
+      "generic_type_params": [],
+      "fields": [
+        {
+          "name": "old_activation_delay",
+          "type": "u64"
+        },
+        {
+          "name": "new_activation_delay",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "DistributionRoot",
+      "is_native": false,
+      "is_event": false,
+      "abilities": [
+        "copy",
+        "drop",
+        "store"
+      ],
+      "generic_type_params": [],
+      "fields": [
+        {
+          "name": "root",
+          "type": "u256"
+        },
+        {
+          "name": "rewards_calculation_end_time",
+          "type": "u64"
+        },
+        {
+          "name": "activated_at",
+          "type": "u64"
+        },
+        {
+          "name": "disabled",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "DistributionRootDisabled",
+      "is_native": false,
+      "is_event": true,
+      "abilities": [
+        "drop",
+        "store"
+      ],
+      "generic_type_params": [],
+      "fields": [
+        {
+          "name": "root_index",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "DistributionRootSubmitted",
+      "is_native": false,
+      "is_event": true,
+      "abilities": [
+        "drop",
+        "store"
+      ],
+      "generic_type_params": [],
+      "fields": [
+        {
+          "name": "root_index",
+          "type": "u64"
+        },
+        {
+          "name": "root",
+          "type": "u256"
+        },
+        {
+          "name": "rewards_calculation_end_time",
+          "type": "u64"
+        },
+        {
+          "name": "activated_at",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "EarnerMerkleTreeLeaf",
+      "is_native": false,
+      "is_event": false,
+      "abilities": [
+        "copy",
+        "drop",
+        "store"
+      ],
+      "generic_type_params": [],
+      "fields": [
+        {
+          "name": "earner",
+          "type": "address"
+        },
+        {
+          "name": "earner_token_root",
+          "type": "vector<u8>"
+        }
+      ]
+    },
+    {
+      "name": "GlobalCommissionBipsSet",
+      "is_native": false,
+      "is_event": true,
+      "abilities": [
+        "drop",
+        "store"
+      ],
+      "generic_type_params": [],
+      "fields": [
+        {
+          "name": "old_global_commisions_bips",
+          "type": "u16"
+        },
+        {
+          "name": "new_global_commisions_bips",
+          "type": "u16"
+        }
+      ]
+    },
+    {
+      "name": "RewardsClaimed",
+      "is_native": false,
+      "is_event": true,
+      "abilities": [
+        "drop",
+        "store"
+      ],
+      "generic_type_params": [],
+      "fields": [
+        {
+          "name": "root",
+          "type": "u256"
+        },
+        {
+          "name": "earner",
+          "type": "address"
+        },
+        {
+          "name": "claimer",
+          "type": "address"
+        },
+        {
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "name": "token",
+          "type": "0x1::object::Object<0x1::fungible_asset::Metadata>"
+        },
+        {
+          "name": "claim_amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "RewardsConfigs",
+      "is_native": false,
+      "is_event": false,
+      "abilities": [
+        "key"
+      ],
+      "generic_type_params": [],
+      "fields": [
+        {
+          "name": "signer_cap",
+          "type": "0x1::account::SignerCapability"
+        },
+        {
+          "name": "rewards_updater",
+          "type": "address"
+        },
+        {
+          "name": "activation_delay",
+          "type": "u64"
+        },
+        {
+          "name": "current_rewards_calculation_end_time",
+          "type": "u64"
+        },
+        {
+          "name": "global_operator_commission_bips",
+          "type": "u16"
+        },
+        {
+          "name": "distribution_roots",
+          "type": "0x1::smart_vector::SmartVector<0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::rewards_coordinator::DistributionRoot>"
+        },
+        {
+          "name": "rewards_for_all_submitter",
+          "type": "0x1::smart_vector::SmartVector<address>"
+        }
+      ]
+    },
+    {
+      "name": "RewardsForAllSubmitterSet",
+      "is_native": false,
+      "is_event": true,
+      "abilities": [
+        "drop",
+        "store"
+      ],
+      "generic_type_params": [],
+      "fields": [
+        {
+          "name": "rewards_for_all_submitter",
+          "type": "address"
+        },
+        {
+          "name": "old_value",
+          "type": "bool"
+        },
+        {
+          "name": "new_value",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "RewardsMerkleClaim",
+      "is_native": false,
+      "is_event": false,
+      "abilities": [
+        "copy",
+        "drop",
+        "store"
+      ],
+      "generic_type_params": [],
+      "fields": [
+        {
+          "name": "root_index",
+          "type": "u64"
+        },
+        {
+          "name": "earner_index",
+          "type": "u32"
+        },
+        {
+          "name": "earner_tree_proof",
+          "type": "vector<u8>"
+        },
+        {
+          "name": "earner_leaf",
+          "type": "0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::rewards_coordinator::EarnerMerkleTreeLeaf"
+        },
+        {
+          "name": "token_indices",
+          "type": "vector<u32>"
+        },
+        {
+          "name": "token_tree_proofs",
+          "type": "vector<vector<u8>>"
+        },
+        {
+          "name": "token_leaves",
+          "type": "vector<0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::rewards_coordinator::TokenMerkleTreeLeaf>"
+        }
+      ]
+    },
+    {
+      "name": "RewardsUpdaterSet",
+      "is_native": false,
+      "is_event": true,
+      "abilities": [
+        "drop",
+        "store"
+      ],
+      "generic_type_params": [],
+      "fields": [
+        {
+          "name": "old_rewards_updater",
+          "type": "address"
+        },
+        {
+          "name": "new_rewards_updater",
+          "type": "address"
+        }
+      ]
+    },
+    {
+      "name": "TokenMerkleTreeLeaf",
+      "is_native": false,
+      "is_event": false,
+      "abilities": [
+        "copy",
+        "drop",
+        "store"
+      ],
+      "generic_type_params": [],
+      "fields": [
+        {
+          "name": "token",
+          "type": "0x1::object::Object<0x1::fungible_asset::Metadata>"
+        },
+        {
+          "name": "cummulative_earnings",
+          "type": "u64"
+        }
+      ]
+    }
+  ]
+}
