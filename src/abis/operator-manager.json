@@ -1,9 +1,9 @@
 {
-  "address": "0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad",
+  "address": "0xc21d060c428458651decddb181cc9c23f9f03bcdaa154e111d3d90206edd11e7",
   "name": "operator_manager",
   "friends": [
-    "0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::staker_manager",
-    "0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::withdrawal"
+    "0xc21d060c428458651decddb181cc9c23f9f03bcdaa154e111d3d90206edd11e7::staker_manager",
+    "0xc21d060c428458651decddb181cc9c23f9f03bcdaa154e111d3d90206edd11e7::withdrawal"
   ],
   "exposed_functions": [
     {

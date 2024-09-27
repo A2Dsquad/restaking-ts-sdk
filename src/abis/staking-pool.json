@@ -1,8 +1,8 @@
 {
-  "address": "0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad",
+  "address": "0xc21d060c428458651decddb181cc9c23f9f03bcdaa154e111d3d90206edd11e7",
   "name": "staking_pool",
   "friends": [
-    "0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::staker_manager"
+    "0xc21d060c428458651decddb181cc9c23f9f03bcdaa154e111d3d90206edd11e7::staker_manager"
   ],
   "exposed_functions": [
     {
@@ -12,7 +12,7 @@
       "is_view": false,
       "generic_type_params": [],
       "params": [
-        "0x1::object::Object<0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::staking_pool::StakingPool>",
+        "0x1::object::Object<0xc21d060c428458651decddb181cc9c23f9f03bcdaa154e111d3d90206edd11e7::staking_pool::StakingPool>",
         "u64"
       ],
       "return": [
@@ -29,7 +29,7 @@
         "0x1::object::Object<0x1::fungible_asset::Metadata>"
       ],
       "return": [
-        "0x1::object::Object<0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::staking_pool::StakingPool>"
+        "0x1::object::Object<0xc21d060c428458651decddb181cc9c23f9f03bcdaa154e111d3d90206edd11e7::staking_pool::StakingPool>"
       ]
     },
     {
@@ -39,7 +39,7 @@
       "is_view": true,
       "generic_type_params": [],
       "params": [
-        "0x1::object::Object<0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::staking_pool::StakingPool>"
+        "0x1::object::Object<0xc21d060c428458651decddb181cc9c23f9f03bcdaa154e111d3d90206edd11e7::staking_pool::StakingPool>"
       ],
       "return": [
         "0x1::object::Object<0x1::fungible_asset::Metadata>"
@@ -52,7 +52,7 @@
       "is_view": true,
       "generic_type_params": [],
       "params": [
-        "0x1::object::Object<0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::staking_pool::StakingPool>"
+        "0x1::object::Object<0xc21d060c428458651decddb181cc9c23f9f03bcdaa154e111d3d90206edd11e7::staking_pool::StakingPool>"
       ],
       "return": [
         "0x1::object::Object<0x1::fungible_asset::FungibleStore>"
@@ -65,7 +65,7 @@
       "is_view": true,
       "generic_type_params": [],
       "params": [
-        "0x1::object::Object<0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::staking_pool::StakingPool>"
+        "0x1::object::Object<0xc21d060c428458651decddb181cc9c23f9f03bcdaa154e111d3d90206edd11e7::staking_pool::StakingPool>"
       ],
       "return": [
         "u128"
@@ -79,7 +79,7 @@
       "generic_type_params": [],
       "params": [
         "address",
-        "0x1::object::Object<0xa1caf02e1756e085e53193897b8dfa80cb2b2a0858537b1a92a9eb477ba0bcad::staking_pool::StakingPool>",
+        "0x1::object::Object<0xc21d060c428458651decddb181cc9c23f9f03bcdaa154e111d3d90206edd11e7::staking_pool::StakingPool>",
         "u128"
       ],
       "return": []

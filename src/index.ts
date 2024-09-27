@@ -9,6 +9,9 @@ import { combineUint8Arrays } from "./utils/uint8-array";
 import { FAAdapter } from './scripts/fungible-asset';
 import { StakerAdapter } from './scripts/staker';
 import { OperatorAdapter } from './scripts/operator';
+import { StakingPoolAdapter } from './scripts/staking-pool';
+
+const token = "0x3a97789007a67518d51c1733caef0c0a60d5db819e64d9bb5abc004f2df934a2";
 
 const deployerPrivateKey = new Ed25519PrivateKey(process.env.DEPLOYER_PRIVATE_KEY as string);
 const deployerAccount = Account.fromPrivateKey({privateKey: deployerPrivateKey});
@@ -101,7 +104,6 @@ async function delegate() {
 }
 
 async function distributeFA(){
-  const token = "0x9425954d7391b7b9b3b5448acf34a1c205f5555424621e34676423783e767fdf";
   const adapter = new FAAdapter(deployerAccount);
   const balance = await adapter.balance(token, deployerAddress);
   console.log(balance);
@@ -113,7 +115,6 @@ async function distributeFA(){
 }
 
 async function stake(){
-  const token = "0x9425954d7391b7b9b3b5448acf34a1c205f5555424621e34676423783e767fdf";
   const adapter = new StakerAdapter(stakerAccount);
   const amount = parseUnits('1000', 8);
   const res = await adapter.stake(token, amount);
@@ -123,14 +124,12 @@ async function stake(){
 }
 
 async function operator(){
-  const token = "0x9425954d7391b7b9b3b5448acf34a1c205f5555424621e34676423783e767fdf";
   const adapter = new OperatorAdapter();
   const shares = await adapter.operatorShares(deployerAddress, [token]);
   console.log(shares);
 }
 
 async function undelegate() {
-  const token = "0x9425954d7391b7b9b3b5448acf34a1c205f5555424621e34676423783e767fdf";
   const stakerAdapter = new StakerAdapter(stakerAccount);
   const operatorAdapter = new OperatorAdapter(deployerAccount);
   const res = await stakerAdapter.undelegate();
@@ -140,7 +139,6 @@ async function undelegate() {
 }
 
 async function queueWithdrawal() {
-  const token = "0x9425954d7391b7b9b3b5448acf34a1c205f5555424621e34676423783e767fdf";
   const stakerAdapter = new StakerAdapter(stakerAccount);
   const amount = parseUnits('500', 8);
   const res = await stakerAdapter.queueWithdrawal([token], [amount]) as UserTransactionResponse;  
@@ -159,4 +157,12 @@ async function completeQueuedWithdrawal() {
     withdrawal_root: '40076266151246870449122142493390754719435589473220808847683366137999899445569'
   };
 }
-queueWithdrawal();
+
+async function totalShares() {
+  const adapter = new StakingPoolAdapter();
+  const pool = '0x7609205655ba8dd9c6882d2a8e025e3262b244c1c9b174f2711f688c49f6a6e2'
+  const data = await adapter.totalShares(pool);
+  console.log(data);
+}
+
+totalShares();
