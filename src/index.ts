@@ -14,9 +14,9 @@ import { StakingPoolAdapter } from './scripts/staking-pool';
 const token = "0x3a97789007a67518d51c1733caef0c0a60d5db819e64d9bb5abc004f2df934a2";
 
 const deployerPrivateKey = new Ed25519PrivateKey(process.env.DEPLOYER_PRIVATE_KEY as string);
-const deployerAccount = Account.fromPrivateKey({privateKey: deployerPrivateKey});
+const deployerAccount = Account.fromPrivateKey({ privateKey: deployerPrivateKey });
 const stakerPrivateKey = new Ed25519PrivateKey(process.env.STAKER_PRIVATE_KEY as string);
-const stakerAccount = Account.fromPrivateKey({privateKey: stakerPrivateKey});
+const stakerAccount = Account.fromPrivateKey({ privateKey: stakerPrivateKey });
 const deployerAddress = deployerAccount.accountAddress.toString();
 const stakerAddress = stakerAccount.accountAddress.toString();
 
@@ -65,8 +65,8 @@ async function merkleTree() {
   const earnerTreeSize = 1 << earnerTreeDepth;
   const earnerIndex = 3;
   const earnerLeaves: EarnerMerkleTreeLeaf[] = [];
-  for(let i = 0; i < earnerTreeSize; i++){
-    if(i !== earnerIndex){
+  for (let i = 0; i < earnerTreeSize; i++) {
+    if (i !== earnerIndex) {
       let tokenTreeRoot = new Uint8Array(32);
       tokenTreeRoot[0] = i;
       tokenTreeRoot[1] = i + 1;
@@ -74,7 +74,7 @@ async function merkleTree() {
         earner: AccountAddress.fromString('0xfaca' + i),
         tokenTreeRoot: new Uint8Array(32)
       }))
-    }else {
+    } else {
       earnerLeaves.push(earnerLeaf);
     }
   }
@@ -103,7 +103,7 @@ async function delegate() {
   console.log(delegateOf);
 }
 
-async function distributeFA(stakerAddress: string){
+async function distributeFA(stakerAddress: string) {
   const adapter = new FAAdapter(deployerAccount);
   const balance = await adapter.balance(token, deployerAddress);
   console.log(balance);
@@ -114,16 +114,16 @@ async function distributeFA(stakerAddress: string){
   console.log(postBal)
 }
 
-async function stake(){
+async function stake() {
   const adapter = new StakerAdapter(stakerAccount);
-  const amount = parseUnits('1000', 8);
-  const res = await adapter.stake(token, amount);
-  console.log(res);
+  // const amount = parseUnits('1000', 8);
+  // const res = await adapter.stake(token, amount);
+  // console.log(res);
   const stakes = await adapter.stakerNonnormalizedShares(stakerAddress);
   console.log(stakes);
 }
 
-async function operator(){
+async function operator() {
   const adapter = new OperatorAdapter();
   const shares = await adapter.operatorShares(deployerAddress, [token]);
   console.log(shares);
@@ -141,30 +141,29 @@ async function undelegate() {
 async function queueWithdrawal() {
   const stakerAdapter = new StakerAdapter(stakerAccount);
   const amount = parseUnits('500', 8);
-  const res = await stakerAdapter.queueWithdrawal([token], [amount]) as UserTransactionResponse;  
+  const res = await stakerAdapter.queueWithdrawal([token], [amount]) as UserTransactionResponse;
   console.log(res.events.map(e => e.data))
 }
 
 async function completeQueuedWithdrawal() {
   const amount = parseUnits('500', 8).toString();
-  const event = {
+  const event =  {
     withdrawal: {
-      delegated_to: '0x0',
-      nonce: '0',
+      delegated_to: '0xa56762ce4e11553d450c1db24fdfd204176d31179e72027319bbce9dc3a1376',
+      nonce: '1',
       nonnormalized_shares: [amount],
       staker: '0xe96eba4fcd8ec0f5b1ce69aca462fdbb363035d44d47b7ee4777d561b9839fb4',
-      start_time: '1727419451',
+      start_time: '1727421871',
       tokens: [token],
       withdrawer: '0xe96eba4fcd8ec0f5b1ce69aca462fdbb363035d44d47b7ee4777d561b9839fb4'
     },
-    withdrawal_root: '14896888848362104562743553056430828926309950833256875735889769116041562976918'
+    withdrawal_root: '25886541316756581720927653218954408642661182219431077611115408638349286015458'
   };
   const adapter = new StakerAdapter(stakerAccount);
-  const operator = await adapter.delegateOf(stakerAddress);
   const result = await adapter.completeQueuedWithdrawal(
-    event.withdrawal.staker, 
-    operator, 
-    event.withdrawal.withdrawer, 
+    event.withdrawal.staker,
+    event.withdrawal.delegated_to,
+    event.withdrawal.withdrawer,
     event.withdrawal.nonce,
     event.withdrawal.start_time,
     event.withdrawal.tokens,
@@ -181,4 +180,4 @@ async function totalShares() {
 }
 
 // distributeFA('0xad7dbaad5063e2c98950711b22d52d76afc679c047ffb68717b8b3482a8993be');
-completeQueuedWithdrawal();
+operator();
