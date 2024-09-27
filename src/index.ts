@@ -15,6 +15,8 @@ const token = "0x3a97789007a67518d51c1733caef0c0a60d5db819e64d9bb5abc004f2df934a
 
 const deployerPrivateKey = new Ed25519PrivateKey(process.env.DEPLOYER_PRIVATE_KEY as string);
 const deployerAccount = Account.fromPrivateKey({ privateKey: deployerPrivateKey });
+const operator2PrivateKey = new Ed25519PrivateKey(process.env.OPERATOR2_PRIVATE_KEY as string);
+const operator2Account = Account.fromPrivateKey({ privateKey: operator2PrivateKey });
 const stakerPrivateKey = new Ed25519PrivateKey(process.env.STAKER_PRIVATE_KEY as string);
 const stakerAccount = Account.fromPrivateKey({ privateKey: stakerPrivateKey });
 const deployerAddress = deployerAccount.accountAddress.toString();
@@ -89,12 +91,14 @@ async function merkleTree() {
   console.log(earnerProofData);
 }
 
+async function makeOperator(account: Account) {
+  const adapter = new StakerAdapter(account);
+  const selfDelRes = await adapter.delegate(account.accountAddress.toString());
+  console.log(selfDelRes);
+}
 async function delegate() {
 
   const stakerAdapter = new StakerAdapter(stakerAccount);
-  const deployerAdapter = new StakerAdapter(deployerAccount);
-  const selfDelRes = await deployerAdapter.delegate(deployerAddress);
-  console.log(selfDelRes);
 
   const result = await stakerAdapter.delegate(deployerAddress);
   console.log(result);
@@ -116,9 +120,9 @@ async function distributeFA(stakerAddress: string) {
 
 async function stake() {
   const adapter = new StakerAdapter(stakerAccount);
-  // const amount = parseUnits('1000', 8);
-  // const res = await adapter.stake(token, amount);
-  // console.log(res);
+  const amount = parseUnits('1000', 8);
+  const res = await adapter.stake(token, amount);
+  console.log(res);
   const stakes = await adapter.stakerNonnormalizedShares(stakerAddress);
   console.log(stakes);
 }
@@ -180,4 +184,9 @@ async function totalShares() {
 }
 
 // distributeFA('0xad7dbaad5063e2c98950711b22d52d76afc679c047ffb68717b8b3482a8993be');
-operator();
+async function generateOperator() {
+  const newOp = Account.generate();
+  console.log(newOp.privateKey.toString(), newOp.publicKey.toString(), newOp.accountAddress.toString());
+};
+
+makeOperator(operator2Account);
