@@ -16,11 +16,11 @@ export class FAAdapter {
   }
 
   async balance(token: string, owner: string) {
-    const [address] = await this.storeClient.view.balance({
+    const [bal] = await this.storeClient.view.balance({
       functionArguments: [owner, token],
       typeArguments: [faMetdataType],  
     })
-    return address;
+    return bal;
   }
 
   async transfer(token: string, recipient: string, amount: bigint) {
