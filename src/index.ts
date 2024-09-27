@@ -103,7 +103,7 @@ async function delegate() {
   console.log(delegateOf);
 }
 
-async function distributeFA(){
+async function distributeFA(stakerAddress: string){
   const adapter = new FAAdapter(deployerAccount);
   const balance = await adapter.balance(token, deployerAddress);
   console.log(balance);
@@ -146,16 +146,31 @@ async function queueWithdrawal() {
 }
 
 async function completeQueuedWithdrawal() {
+  const amount = parseUnits('500', 8).toString();
   const event = {
     withdrawal: {
-      delegated_to: '0xa56762ce4e11553d450c1db24fdfd204176d31179e72027319bbce9dc3a1376',
+      delegated_to: '0x0',
       nonce: '0',
+      nonnormalized_shares: [amount],
       staker: '0xe96eba4fcd8ec0f5b1ce69aca462fdbb363035d44d47b7ee4777d561b9839fb4',
-      start_time: '1727174102',
+      start_time: '1727419451',
+      tokens: [token],
       withdrawer: '0xe96eba4fcd8ec0f5b1ce69aca462fdbb363035d44d47b7ee4777d561b9839fb4'
     },
-    withdrawal_root: '40076266151246870449122142493390754719435589473220808847683366137999899445569'
+    withdrawal_root: '14896888848362104562743553056430828926309950833256875735889769116041562976918'
   };
+  const adapter = new StakerAdapter(stakerAccount);
+  const operator = await adapter.delegateOf(stakerAddress);
+  const result = await adapter.completeQueuedWithdrawal(
+    event.withdrawal.staker, 
+    operator, 
+    event.withdrawal.withdrawer, 
+    event.withdrawal.nonce,
+    event.withdrawal.start_time,
+    event.withdrawal.tokens,
+    event.withdrawal.nonnormalized_shares,
+  )
+  console.log(result);
 }
 
 async function totalShares() {
@@ -165,4 +180,5 @@ async function totalShares() {
   console.log(data);
 }
 
-totalShares();
+// distributeFA('0xad7dbaad5063e2c98950711b22d52d76afc679c047ffb68717b8b3482a8993be');
+completeQueuedWithdrawal();

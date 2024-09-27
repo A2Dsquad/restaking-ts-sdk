@@ -72,7 +72,21 @@ export class StakerAdapter {
     return result;
   }
 
-  async completeQueuedWithdrawal() {
-    
+  async completeQueuedWithdrawal(staker: string, operator: string, withdrawer: string, nonce: string, startTime: string, tokens: string[], amounts: string[]) {
+    const result = await this.withdrawalClient.entry.complete_queued_withdrawal({
+      functionArguments: [staker,
+        operator,
+        withdrawer,
+        nonce,
+        startTime,
+        tokens,
+        amounts,
+        true,
+      ],
+      typeArguments: [],
+      account: this.account,
+    })
+
+    return result;
   }
 }
